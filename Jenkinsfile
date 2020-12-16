@@ -12,7 +12,6 @@ pipeline {
             }
         }
         stage('Building our image') {
-            def d = new Date().format( 'yyyyMMdd' )
             steps {
                 script {
                     dockerImage = docker.build registry + ":$BUILD_NUMBER"
