@@ -1,6 +1,6 @@
 pipeline {
     environment {
-        registry = 'https://hub.docker.com/r/ansmeliti/first-demo-app'
+        registry = '/r/ansmeliti/first-demo-app'
         registryCredential = ''
         dockerImage = ''
     }
