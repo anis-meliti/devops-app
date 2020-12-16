@@ -1,6 +1,10 @@
-node {
+pipeline {
+    agent {
+        dockerfile true
+    }
     def nodeHome = tool name:'node-14.15.1' , type: 'jenkins.plugins.nodejs.tools.NodeJSInstallation'
     env.PATH = "${nodeHome}/bin:${env.PATH}"
+    def d = new Date().format( 'yyyyMMdd' )
 
     stage ('checkout tools') {
         sh 'node -v'
@@ -16,7 +20,9 @@ node {
     stage ('run build') {
         sh 'npm run build'
     }
-    stage (' run app') {
-        sh 'npm start'
+    stage ('docker build/push') {
+        docker.withRegistry('https://index.docker.io', 'dockerhub') {
+            docker.build("ansmeliti/first-demo-app:${d}", '.').push()
+        }
     }
 }
