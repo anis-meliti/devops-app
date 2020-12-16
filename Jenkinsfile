@@ -1,4 +1,4 @@
-pipeline {
+node {
     def d = new Date().format( 'yyyyMMdd' )
 
     stage ('checkout tools') {
