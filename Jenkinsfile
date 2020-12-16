@@ -15,7 +15,7 @@ pipeline {
             def d = new Date().format( 'yyyyMMdd' )
             steps {
                 script {
-                    dockerImage = docker.build registry + ":$d"
+                    dockerImage = docker.build registry + ":$BUILD_NUMBER"
                 }
             }
         }
@@ -30,7 +30,7 @@ pipeline {
         }
         stage('Cleaning up') {
             steps {
-                sh "docker rmi $registry:$d"
+                sh "docker rmi $registry:$BUILD_NUMBER"
             }
         }
     }
