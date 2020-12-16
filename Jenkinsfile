@@ -4,7 +4,6 @@ pipeline {
         registryCredential = ''
         dockerImage = ''
     }
-    def d = new Date().format( 'yyyyMMdd' )
     agent any
     stages {
         stage('Cloning our Git') {
@@ -13,6 +12,7 @@ pipeline {
             }
         }
         stage('Building our image') {
+            def d = new Date().format( 'yyyyMMdd' )
             steps {
                 script {
                     dockerImage = docker.build registry + ":$d"
