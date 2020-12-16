@@ -20,9 +20,12 @@ pipeline {
         }
         stage('Deploy our image') {
             steps {
-                dockerImage.push()
+                script {
+                        dockerImage.push()
+                }
             }
         }
+
         stage('Cleaning up') {
             steps {
                 sh "docker rmi $registry:$BUILD_NUMBER"
